@@ -4,6 +4,16 @@ class Program
 {
     static void Main()
     {
+        Requirement1();
+        Requirement2();
+    }
+
+    public static void Requirement1()
+    {
+        Console.WriteLine("Requirement 1");
+        Console.WriteLine("-------------------");
+        Console.WriteLine();
+
         // Prompt user for input
         Console.Write("Enter an integer: ");
         string inputValue = Console.ReadLine();
@@ -59,5 +69,53 @@ class Program
             // and the sum of numbers divisible by 3 or 5
             Console.Write($"{result} = {sum}");
         }
+    }
+
+    public static void Requirement2()
+    {
+        Console.WriteLine("\n\n");
+        Console.WriteLine("Requirement 2");
+        Console.WriteLine("-------------------");
+        Console.WriteLine();
+
+        // File path to save the Fibonacci sequence.
+        // NOTE: For this assessment, I am using a relative path.
+        string filePath = "Fibonacci.txt";
+
+        // Array to hold the first 15 Fibonacci numbers
+        int[] fibonacci = new int[15];
+
+        // Initialize the first two Fibonacci numbers
+        fibonacci[0] = 0;
+        fibonacci[1] = 1;
+
+        // Generate the rest of the Fibonacci sequence
+        for (int i = 2; i < 15; i++)
+        {
+            fibonacci[i] = fibonacci[i - 1] + fibonacci[i - 2];
+        }
+
+        // Writing the Fibonacci sequence to a file
+        using (StreamWriter writer = new StreamWriter(filePath))
+        {
+            writer.WriteLine("First 15 numbers of the Fibonacci sequence:");
+
+            string result = string.Empty;
+            foreach (int number in fibonacci)
+            {
+                result += number.ToString() + ",";
+            }
+
+            // Remove last ',' if it exists
+            if (result.EndsWith(","))
+            {
+                result = result.Remove(result.Length - 1);
+            }
+
+            // Write the Fibonacci sequence to the file
+            writer.Write(result);
+        }
+
+        Console.WriteLine("Fibonacci sequence saved to 'Fibonacci.txt'");
     }
 }
